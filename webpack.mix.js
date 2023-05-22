@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +11,26 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
+// mix.js("resources/js/app.jsx", "public/js").postCss(
+//     "resources/css/app.css",
+//     "public/css",
+//     [
+//         //
+//     ]
+// );
+
+mix.react("resources/js/app.jsx", "public/js")
+    .postCss("resources/css/app.css", "public/css", [
         //
-    ]);
+    ])
+    .webpackConfig({
+        resolve: {
+            extensions: [".js", ".jsx"],
+            alias: {
+                "@": path.resolve(__dirname, "resources/js"),
+            },
+        },
+        output: {
+            chunkFilename: "js/[name].js?id=[chunkhash]",
+        },
+    });
