@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/inertia-react";
 import { InertiaProgress } from "@inertiajs/progress";
 
+import { ThemeProvider } from "@material-tailwind/react";
+import { MaterialTailwindControllerProvider } from "@/context";
+
 InertiaProgress.init();
 
 createInertiaApp({
@@ -11,6 +14,14 @@ createInertiaApp({
         return pages.default;
     },
     setup({ el, App, props }) {
-        createRoot(el).render(<App {...props} />);
+        createRoot(el).render(
+            <React.StrictMode>
+                <ThemeProvider>
+                    <MaterialTailwindControllerProvider>
+                        <App {...props} />
+                    </MaterialTailwindControllerProvider>
+                </ThemeProvider>
+            </React.StrictMode>
+        );
     },
 });

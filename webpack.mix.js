@@ -12,15 +12,10 @@ const path = require("path");
  |
  */
 
-// mix.js("resources/js/app.jsx", "public/js").postCss(
-//     "resources/css/app.css",
-//     "public/css",
-//     [
-//         //
-//     ]
-// );
+mix.browserSync("127.0.0.1:8000");
 
-mix.react("resources/js/app.jsx", "public/js")
+mix.js("resources/js/app.jsx", "public/js")
+    .react()
     .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
     .webpackConfig({
         resolve: {
