@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use Inertia\Inertia;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/test', [\App\Http\Controllers\TestController::class, "show"])->name("test");
+
+Route::get('/home', function () {
+    return Inertia::render('Home');
+})->name('home');

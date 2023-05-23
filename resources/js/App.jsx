@@ -1,10 +1,16 @@
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import { createInertiaApp } from "@inertiajs/inertia-react";
+import { InertiaProgress } from "@inertiajs/progress";
+
+InertiaProgress.init();
 
 createInertiaApp({
-    resolve: (name) => require(`./Pages/${name}`),
+    resolve: async (name) => {
+        const pages = await import(`./Pages/${name}`);
+        return pages.default;
+    },
     setup({ el, App, props }) {
-        render(<App {...props} />, el);
+        createRoot(el).render(<App {...props} />);
     },
 });
