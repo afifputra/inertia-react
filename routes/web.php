@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-use Inertia\Inertia;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/test', [\App\Http\Controllers\TestController::class, "show"])->name("test");
 
-Route::get('/home', function () {
-    return Inertia::render('Home');
-})->name('home');
+Route::get('/login', [LoginController::class, "index"])->name("login");
+Route::get('/register', [RegisterController::class, "index"])->name("register");
