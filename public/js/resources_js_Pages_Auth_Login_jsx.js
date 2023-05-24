@@ -1,9 +1,9 @@
 "use strict";
-(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_Auth_Login_jsx"],{
+(self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_Pages_auth_Login_jsx"],{
 
-/***/ "./resources/js/Pages/Auth/Login.jsx":
+/***/ "./resources/js/Pages/auth/Login.jsx":
 /*!*******************************************!*\
-  !*** ./resources/js/Pages/Auth/Login.jsx ***!
+  !*** ./resources/js/Pages/auth/Login.jsx ***!
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 

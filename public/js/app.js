@@ -86819,22 +86819,6 @@ function __classPrivateFieldIn(state, receiver) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./Auth/Login": [
-		"./resources/js/Pages/Auth/Login.jsx",
-		"resources_js_Pages_Auth_Login_jsx"
-	],
-	"./Auth/Login.jsx": [
-		"./resources/js/Pages/Auth/Login.jsx",
-		"resources_js_Pages_Auth_Login_jsx"
-	],
-	"./Auth/Register": [
-		"./resources/js/Pages/Auth/Register.jsx",
-		"resources_js_Pages_Auth_Register_jsx"
-	],
-	"./Auth/Register.jsx": [
-		"./resources/js/Pages/Auth/Register.jsx",
-		"resources_js_Pages_Auth_Register_jsx"
-	],
 	"./Home": [
 		"./resources/js/Pages/Home.jsx",
 		"resources_js_Pages_Home_jsx"
@@ -86850,6 +86834,22 @@ var map = {
 	"./Test.jsx": [
 		"./resources/js/Pages/Test.jsx",
 		"resources_js_Pages_Test_jsx"
+	],
+	"./auth/Login": [
+		"./resources/js/Pages/auth/Login.jsx",
+		"resources_js_Pages_auth_Login_jsx"
+	],
+	"./auth/Login.jsx": [
+		"./resources/js/Pages/auth/Login.jsx",
+		"resources_js_Pages_auth_Login_jsx"
+	],
+	"./auth/Register": [
+		"./resources/js/Pages/auth/Register.jsx",
+		"resources_js_Pages_auth_Register_jsx"
+	],
+	"./auth/Register.jsx": [
+		"./resources/js/Pages/auth/Register.jsx",
+		"resources_js_Pages_auth_Register_jsx"
 	]
 };
 function webpackAsyncContext(req) {
@@ -88846,7 +88846,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_Login_jsx":"714d0589159a7dc4","resources_js_Pages_Auth_Register_jsx":"e8064bc3d79e2017","resources_js_Pages_Home_jsx":"b5bff5be9f2a397f","resources_js_Pages_Test_jsx":"12f27905297818c0"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Home_jsx":"aebbea0d5b8982f0","resources_js_Pages_Test_jsx":"12f27905297818c0","resources_js_Pages_auth_Login_jsx":"899d7dfda898614d","resources_js_Pages_auth_Register_jsx":"245d0ba9410e03d5"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	
