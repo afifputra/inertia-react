@@ -23,4 +23,8 @@ Route::get('/test', function () {
 })->name("home");
 
 Route::get('/login', [LoginController::class, "index"])->name("login");
-Route::get('/register', [RegisterController::class, "index"])->name("register");
+
+Route::prefix('register')->group(function () {
+    Route::get('/', [RegisterController::class, "index"])->name("register");
+    Route::post('/', [RegisterController::class, "store"])->name("register.store");
+});

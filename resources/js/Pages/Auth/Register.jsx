@@ -1,4 +1,6 @@
-import { Link } from "@inertiajs/inertia-react";
+import { createPortal } from "react-dom";
+import { Link, useForm } from "@inertiajs/inertia-react";
+import { ToastContainer, toast } from "react-toastify";
 import {
     Card,
     CardHeader,
@@ -10,9 +12,37 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
+import "react-toastify/dist/ReactToastify.css";
+
 export function Register() {
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+        agreement: false,
+    });
+
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        if (!data.agreement) {
+            alert("You must agree to the terms and conditions.");
+            return;
+        }
+
+        post(route("register"), {
+            onSuccess: () => reset(),
+        });
+    }
+
     return (
         <>
+            {createPortal(
+                // Create portal for toast
+                <ToastContainer />,
+                document.body
+            )}
             <img
                 src="https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80"
                 className="absolute inset-0 z-0 h-full w-full object-cover"
@@ -29,35 +59,98 @@ export function Register() {
                             Sign Up
                         </Typography>
                     </CardHeader>
-                    <CardBody className="flex flex-col gap-4">
-                        <Input label="Name" size="lg" />
-                        <Input type="email" label="Email" size="lg" />
-                        <Input type="password" label="Password" size="lg" />
-                        <div className="-ml-2.5">
-                            <Checkbox label="I agree the Terms and Conditions" />
-                        </div>
-                    </CardBody>
-                    <CardFooter className="pt-0">
-                        <Button variant="gradient" fullWidth>
-                            Sign Up
-                        </Button>
-                        <Typography
-                            variant="small"
-                            className="mt-6 flex justify-center"
-                        >
-                            Already have an account?
-                            <Link href={route("login")}>
-                                <Typography
-                                    as="span"
-                                    variant="small"
-                                    color="blue"
-                                    className="ml-1 font-bold"
-                                >
-                                    Sign in
-                                </Typography>
-                            </Link>
-                        </Typography>
-                    </CardFooter>
+                    <Button
+                        variant="gradient"
+                        color="blue"
+                        fullWidth
+                        onClick={() =>
+                            toast("🦄 Wow so easy!", {
+                                position: "top-right",
+                                autoClose: 1000,
+                                onClose: () =>
+                                    window.location.replace(route("login")),
+                            })
+                        }
+                    >
+                        Tes
+                    </Button>
+                    <form onSubmit={handleSubmit}>
+                        <CardBody className="flex flex-col gap-4">
+                            <Input
+                                label="Name"
+                                size="lg"
+                                value={data.name}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                            />
+                            <Input
+                                type="email"
+                                label="Email"
+                                size="lg"
+                                value={data.email}
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                            />
+                            <Input
+                                type="password"
+                                label="Password"
+                                size="lg"
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                            />
+                            <Input
+                                type="password"
+                                label="Confirm Password"
+                                size="lg"
+                                value={data.password_confirmation}
+                                onChange={(e) =>
+                                    setData(
+                                        "password_confirmation",
+                                        e.target.value
+                                    )
+                                }
+                            />
+                            <div className="-ml-2.5">
+                                <Checkbox
+                                    label="I agree the Terms and Conditions"
+                                    checked={data.agreement}
+                                    onChange={(e) =>
+                                        setData("agreement", e.target.checked)
+                                    }
+                                />
+                            </div>
+                        </CardBody>
+                        <CardFooter className="pt-0">
+                            <Button
+                                variant="gradient"
+                                fullWidth
+                                type="submit"
+                                disabled={processing}
+                            >
+                                Sign Up
+                            </Button>
+                            <Typography
+                                variant="small"
+                                className="mt-6 flex justify-center"
+                            >
+                                Already have an account?
+                                <Link href={route("login")}>
+                                    <Typography
+                                        as="span"
+                                        variant="small"
+                                        color="blue"
+                                        className="ml-1 font-bold"
+                                    >
+                                        Sign in
+                                    </Typography>
+                                </Link>
+                            </Typography>
+                        </CardFooter>
+                    </form>
                 </Card>
             </div>
         </>

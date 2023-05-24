@@ -88846,7 +88846,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Home_jsx":"aebbea0d5b8982f0","resources_js_Pages_Test_jsx":"12f27905297818c0","resources_js_Pages_auth_Login_jsx":"899d7dfda898614d","resources_js_Pages_auth_Register_jsx":"245d0ba9410e03d5"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Home_jsx":"aebbea0d5b8982f0","resources_js_Pages_Test_jsx":"12f27905297818c0","resources_js_Pages_auth_Login_jsx":"899d7dfda898614d","resources_js_Pages_auth_Register_jsx":"aa00b8ece14d8be6"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	
@@ -89035,6 +89035,11 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
 /******/ 	})();
 /******/ 	
 /************************************************************************/
