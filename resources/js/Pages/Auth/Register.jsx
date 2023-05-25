@@ -1,6 +1,5 @@
-import { createPortal } from "react-dom";
 import { Link, useForm } from "@inertiajs/inertia-react";
-import { ToastContainer, toast } from "react-toastify";
+import useToast from "@/hooks/useToast";
 import {
     Card,
     CardHeader,
@@ -12,9 +11,10 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 export function Register() {
+    const showToast = useToast();
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
@@ -27,7 +27,13 @@ export function Register() {
         e.preventDefault();
 
         if (!data.agreement) {
-            alert("You must agree to the terms and conditions.");
+            showToast(
+                "You must agree the Terms and Conditions",
+                "error",
+                () => {
+                    console.log("callback");
+                }
+            );
             return;
         }
 
@@ -38,11 +44,7 @@ export function Register() {
 
     return (
         <>
-            {createPortal(
-                // Create portal for toast
-                <ToastContainer />,
-                document.body
-            )}
+            <ToastContainer containerId="toastContainer" />
             <img
                 src="https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80"
                 className="absolute inset-0 z-0 h-full w-full object-cover"
@@ -59,21 +61,6 @@ export function Register() {
                             Sign Up
                         </Typography>
                     </CardHeader>
-                    <Button
-                        variant="gradient"
-                        color="blue"
-                        fullWidth
-                        onClick={() =>
-                            toast("🦄 Wow so easy!", {
-                                position: "top-right",
-                                autoClose: 1000,
-                                onClose: () =>
-                                    window.location.replace(route("login")),
-                            })
-                        }
-                    >
-                        Tes
-                    </Button>
                     <form onSubmit={handleSubmit}>
                         <CardBody className="flex flex-col gap-4">
                             <Input

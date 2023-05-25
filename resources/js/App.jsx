@@ -10,7 +10,8 @@ InertiaProgress.init();
 
 createInertiaApp({
     resolve: async (name) => {
-        const pages = await import(`./Pages/${name}`);
+        const pages = await import(`./pages/${name}`);
+
         return pages.default;
     },
     setup({ el, App, props }) {
