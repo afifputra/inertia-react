@@ -32,5 +32,7 @@ class RegisterController extends Controller
 
         $role = Role::findByName('user');
         $user->assignRole($role);
+
+        return redirect()->route('register')->with('success', 'User created successfully!');
     }
 }

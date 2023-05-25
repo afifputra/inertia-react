@@ -42,53 +42,60 @@ export function Login() {
                             Sign In
                         </Typography>
                     </CardHeader>
-                    <CardBody className="flex flex-col gap-4">
-                        <Input type="email" label="Email" size="lg" />
-                        <Input type="password" label="Password" size="lg" />
-                        <div className="-ml-2.5">
-                            <Checkbox label="Remember Me" />
-                        </div>
-                    </CardBody>
-                    <CardFooter className="pt-0">
-                        <Button
-                            variant="gradient"
-                            fullWidth
-                            onClick={handleClick}
-                            disabled={isClicked}
-                        >
-                            {isClicked && (
-                                <div className="flex justify-center items-center">
-                                    <Spinner
-                                        color="white"
-                                        className="h-4 w-4"
-                                    />
+                    <form>
+                        <CardBody className="flex flex-col gap-4">
+                            <Input type="email" label="Email" size="lg" />
+                            <Input
+                                type="password"
+                                label="Password"
+                                size="lg"
+                                autoComplete="on"
+                            />
+                            <div className="-ml-2.5">
+                                <Checkbox label="Remember Me" />
+                            </div>
+                        </CardBody>
+                        <CardFooter className="pt-0">
+                            <Button
+                                variant="gradient"
+                                fullWidth
+                                onClick={handleClick}
+                                disabled={isClicked}
+                            >
+                                {isClicked && (
+                                    <div className="flex justify-center items-center">
+                                        <Spinner
+                                            color="white"
+                                            className="h-4 w-4"
+                                        />
+                                        <Typography
+                                            className="ml-2 font-bold"
+                                            variant="small"
+                                        >
+                                            Loading
+                                        </Typography>
+                                    </div>
+                                )}
+                                {!isClicked && "Sign In"}
+                            </Button>
+                            <Typography
+                                variant="small"
+                                className="mt-6 flex justify-center"
+                            >
+                                Tidak punya akun?
+                                <Link href={route("register")}>
                                     <Typography
-                                        className="ml-2 font-bold"
+                                        as="span"
                                         variant="small"
+                                        color="blue"
+                                        className="ml-1 font-bold"
                                     >
-                                        Loading
+                                        Sign up
                                     </Typography>
-                                </div>
-                            )}
-                            {!isClicked && "Sign In"}
-                        </Button>
-                        <Typography
-                            variant="small"
-                            className="mt-6 flex justify-center"
-                        >
-                            Tidak punya akun?
-                            <Link href={route("register")}>
-                                <Typography
-                                    as="span"
-                                    variant="small"
-                                    color="blue"
-                                    className="ml-1 font-bold"
-                                >
-                                    Sign up
-                                </Typography>
-                            </Link>
-                        </Typography>
-                    </CardFooter>
+                                </Link>
+                            </Typography>
+                        </CardFooter>
+                    </form>
                 </Card>
             </div>
         </>

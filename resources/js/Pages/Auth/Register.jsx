@@ -27,18 +27,20 @@ export function Register() {
         e.preventDefault();
 
         if (!data.agreement) {
-            showToast(
-                "You must agree the Terms and Conditions",
-                "error",
-                () => {
-                    console.log("callback");
-                }
-            );
+            showToast("You must agree the Terms and Conditions", "error");
             return;
         }
 
         post(route("register"), {
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                showToast("Account created successfully", "success", () => {
+                    reset();
+                    window.location.href = route("login");
+                });
+            },
+            onError: () => {
+                console.log("error");
+            },
         });
     }
 
@@ -84,6 +86,7 @@ export function Register() {
                                 type="password"
                                 label="Password"
                                 size="lg"
+                                autoComplete="on"
                                 value={data.password}
                                 onChange={(e) =>
                                     setData("password", e.target.value)
@@ -93,6 +96,7 @@ export function Register() {
                                 type="password"
                                 label="Confirm Password"
                                 size="lg"
+                                autoComplete="on"
                                 value={data.password_confirmation}
                                 onChange={(e) =>
                                     setData(
