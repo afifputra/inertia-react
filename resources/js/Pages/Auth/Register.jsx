@@ -1,4 +1,5 @@
 import { Link, useForm } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 import useToast from "@/hooks/useToast";
 import {
     Card,
@@ -35,7 +36,7 @@ export function Register() {
             onSuccess: () => {
                 showToast("Account created successfully", "success", () => {
                     reset();
-                    window.location.href = route("login");
+                    Inertia.visit(route("login"));
                 });
             },
             onError: () => {

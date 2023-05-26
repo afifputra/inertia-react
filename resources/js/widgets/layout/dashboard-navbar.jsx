@@ -86,7 +86,7 @@ export function DashboardNavbar() {
                             className="h-6 w-6 text-blue-gray-500"
                         />
                     </IconButton>
-                    <Link to="/auth/sign-in">
+                    <Link href={route("logout")} method="post">
                         <Button
                             variant="text"
                             color="blue-gray"

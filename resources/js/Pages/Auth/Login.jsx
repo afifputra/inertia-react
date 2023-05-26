@@ -1,26 +1,50 @@
-import { useState } from "react";
-import { Link } from "@inertiajs/inertia-react";
-import { InertiaHead } from "@inertiajs/inertia-react";
+import { Link, InertiaHead, useForm } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 import {
     Card,
     CardHeader,
     CardBody,
     CardFooter,
     Input,
-    Checkbox,
     Button,
     Typography,
     Spinner,
 } from "@material-tailwind/react";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
 
 export function Login() {
-    const [isClicked, setIsClicked] = useState(false);
+    const { data, setData, post, processing, errors, clearErrors } = useForm({
+        email: "",
+        password: "",
+    });
 
-    const handleClick = () => {
-        setIsClicked(true);
-        setTimeout(() => {
-            setIsClicked(false);
-        }, 2000);
+    const handleEmail = (e) => {
+        setData("email", e.target.value);
+
+        if (errors.email) {
+            clearErrors("email");
+        }
+    };
+
+    const handlePassword = (e) => {
+        setData("password", e.target.value);
+
+        if (errors.password) {
+            clearErrors("password");
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        post(route("login.store"), {
+            onSuccess: () => {
+                Inertia.visit(route("dashboard"));
+            },
+            onError: () => {
+                console.log("error");
+            },
+        });
     };
 
     return (
@@ -42,27 +66,54 @@ export function Login() {
                             Sign In
                         </Typography>
                     </CardHeader>
-                    <form>
-                        <CardBody className="flex flex-col gap-4">
-                            <Input type="email" label="Email" size="lg" />
-                            <Input
-                                type="password"
-                                label="Password"
-                                size="lg"
-                                autoComplete="on"
-                            />
-                            <div className="-ml-2.5">
-                                <Checkbox label="Remember Me" />
+                    <form onSubmit={handleSubmit}>
+                        <CardBody className="flex flex-col gap-6">
+                            <div className="flex flex-col gap-2">
+                                <Input
+                                    type="email"
+                                    label="Email"
+                                    size="lg"
+                                    onChange={handleEmail}
+                                    value={data.email}
+                                    error={Boolean(errors.email)}
+                                />
+                                {errors.email && (
+                                    <div className="flex items-center gap-2">
+                                        <InformationCircleIcon className="h-5 w-5 text-red-500" />
+                                        <Typography variant="small" color="red">
+                                            {errors.email}
+                                        </Typography>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <Input
+                                    type="password"
+                                    label="Password"
+                                    size="lg"
+                                    autoComplete="on"
+                                    onChange={handlePassword}
+                                    value={data.password}
+                                    error={Boolean(errors.password)}
+                                />
+                                {errors.password && (
+                                    <div className="flex items-center gap-2">
+                                        <InformationCircleIcon className="h-5 w-5 text-red-500" />
+                                        <Typography variant="small" color="red">
+                                            {errors.password}
+                                        </Typography>
+                                    </div>
+                                )}
                             </div>
                         </CardBody>
                         <CardFooter className="pt-0">
                             <Button
                                 variant="gradient"
                                 fullWidth
-                                onClick={handleClick}
-                                disabled={isClicked}
+                                disabled={processing}
+                                type="submit"
                             >
-                                {isClicked && (
+                                {processing && (
                                     <div className="flex justify-center items-center">
                                         <Spinner
                                             color="white"
@@ -76,7 +127,7 @@ export function Login() {
                                         </Typography>
                                     </div>
                                 )}
-                                {!isClicked && "Sign In"}
+                                {!processing && "Sign In"}
                             </Button>
                             <Typography
                                 variant="small"

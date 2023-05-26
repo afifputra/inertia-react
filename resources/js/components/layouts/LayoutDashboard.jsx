@@ -10,7 +10,7 @@ import {
 
 import { useMaterialTailwindController, setOpenConfigurator } from "@/context";
 
-const Dashboard = ({ children }) => {
+const LayoutDashboard = ({ children }) => {
     const [controller, dispatch] = useMaterialTailwindController();
     const { sidenavType } = controller;
 
@@ -44,4 +44,4 @@ const Dashboard = ({ children }) => {
     );
 };
 
-export default Dashboard;
+export default LayoutDashboard;

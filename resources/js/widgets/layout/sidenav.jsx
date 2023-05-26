@@ -7,6 +7,7 @@ import {
     IconButton,
     Typography,
 } from "@material-tailwind/react";
+import { HomeIcon } from "@heroicons/react/24/solid";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
 
 export function Sidenav({ brandImg, brandName }) {
@@ -70,7 +71,7 @@ export function Sidenav({ brandImg, brandName }) {
                         </Typography>
                     </li>
                     <li>
-                        <Link href={route("home")}>
+                        <Link href={route("dashboard")}>
                             <Button
                                 variant={isActive ? "gradient" : "text"}
                                 color={
@@ -83,6 +84,7 @@ export function Sidenav({ brandImg, brandName }) {
                                 className="flex items-center gap-4 px-4 capitalize"
                                 fullWidth
                             >
+                                <HomeIcon className="w-5 h-5 text-inherit" />
                                 <Typography
                                     color="inherit"
                                     className="font-medium capitalize"
@@ -100,7 +102,7 @@ export function Sidenav({ brandImg, brandName }) {
 
 Sidenav.defaultProps = {
     brandImg: "/img/logo-ct.png",
-    brandName: "Material Tailwind React",
+    brandName: "Merchant App",
 };
 
 Sidenav.propTypes = {
