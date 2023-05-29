@@ -11,7 +11,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $userLoggedIn = auth()->user();
-        return Inertia::render('Dashboard')->with('user', $userLoggedIn);
+        return Inertia::render('Dashboard');
     }
 }

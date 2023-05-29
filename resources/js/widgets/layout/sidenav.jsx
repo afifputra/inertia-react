@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Link } from "@inertiajs/inertia-react";
+import { Link, usePage } from "@inertiajs/inertia-react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
     Avatar,
@@ -7,10 +7,10 @@ import {
     IconButton,
     Typography,
 } from "@material-tailwind/react";
-import { HomeIcon } from "@heroicons/react/24/solid";
 import { useMaterialTailwindController, setOpenSidenav } from "@/context";
+import MENU from "@/data/menu-sidenav-data";
 
-export function Sidenav({ brandImg, brandName }) {
+export function Sidenav({ brandName }) {
     const [controller, dispatch] = useMaterialTailwindController();
     const { sidenavColor, sidenavType, openSidenav } = controller;
     const sidenavTypes = {
@@ -18,8 +18,7 @@ export function Sidenav({ brandImg, brandName }) {
         white: "bg-white shadow-lg",
         transparent: "bg-transparent",
     };
-
-    const isActive = true;
+    const { config } = usePage().props;
 
     return (
         <aside
@@ -34,8 +33,14 @@ export function Sidenav({ brandImg, brandName }) {
                         : "border-blue-gray-50"
                 }`}
             >
-                <Link to="/" className="flex items-center gap-4 py-6 px-8">
-                    <Avatar src={brandImg} size="sm" />
+                <Link
+                    href={route("dashboard")}
+                    className="flex items-center gap-4 py-6 px-8"
+                >
+                    <Avatar
+                        src="https://thumbs.dreamstime.com/b/merchant-icon-affiliate-marketing-collection-simple-line-templates-web-design-infographics-176655471.jpg"
+                        size="sm"
+                    />
                     <Typography
                         variant="h6"
                         color={sidenavType === "dark" ? "white" : "blue-gray"}
@@ -71,28 +76,37 @@ export function Sidenav({ brandImg, brandName }) {
                         </Typography>
                     </li>
                     <li>
-                        <Link href={route("dashboard")}>
-                            <Button
-                                variant={isActive ? "gradient" : "text"}
-                                color={
-                                    isActive
-                                        ? sidenavColor
-                                        : sidenavType === "dark"
-                                        ? "white"
-                                        : "blue-gray"
-                                }
-                                className="flex items-center gap-4 px-4 capitalize"
-                                fullWidth
-                            >
-                                <HomeIcon className="w-5 h-5 text-inherit" />
-                                <Typography
-                                    color="inherit"
-                                    className="font-medium capitalize"
-                                >
-                                    Home
-                                </Typography>
-                            </Button>
-                        </Link>
+                        {MENU.map((item, index) => {
+                            console.log(config.currentRouteName === item.id);
+                            return (
+                                <Link href={item.url} key={index}>
+                                    <Button
+                                        variant={
+                                            config.currentRouteName === item.id
+                                                ? "gradient"
+                                                : "text"
+                                        }
+                                        color={
+                                            config.currentRouteName === item.id
+                                                ? sidenavColor
+                                                : sidenavType === "dark"
+                                                ? "white"
+                                                : "blue-gray"
+                                        }
+                                        className="flex items-center gap-4 px-4 capitalize"
+                                        fullWidth
+                                    >
+                                        <item.icon className="w-5 h-5 text-inherit" />
+                                        <Typography
+                                            color="inherit"
+                                            className="font-medium capitalize"
+                                        >
+                                            {item.name}
+                                        </Typography>
+                                    </Button>
+                                </Link>
+                            );
+                        })}
                     </li>
                 </ul>
             </div>
@@ -101,12 +115,10 @@ export function Sidenav({ brandImg, brandName }) {
 }
 
 Sidenav.defaultProps = {
-    brandImg: "/img/logo-ct.png",
     brandName: "Merchant App",
 };
 
 Sidenav.propTypes = {
-    brandImg: PropTypes.string,
     brandName: PropTypes.string,
 };
 

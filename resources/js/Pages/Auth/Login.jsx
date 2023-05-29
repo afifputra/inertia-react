@@ -1,4 +1,4 @@
-import { Link, InertiaHead, useForm } from "@inertiajs/inertia-react";
+import { Link, InertiaHead, useForm, usePage } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
 import {
     Card,
@@ -13,6 +13,8 @@ import {
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 
 export function Login() {
+    const { appName } = usePage().props;
+
     const { data, setData, post, processing, errors, clearErrors } = useForm({
         email: "",
         password: "",
@@ -49,7 +51,7 @@ export function Login() {
 
     return (
         <>
-            <InertiaHead title="Login" />
+            <InertiaHead title={`Login - ${appName}`} />
             <img
                 src="https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80"
                 className="absolute inset-0 z-0 h-full w-full object-cover"

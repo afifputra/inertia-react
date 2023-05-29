@@ -1,4 +1,4 @@
-import { Link, useForm } from "@inertiajs/inertia-react";
+import { Link, useForm, usePage, InertiaHead } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
 import useToast from "@/hooks/useToast";
 import {
@@ -16,6 +16,7 @@ import { ToastContainer } from "react-toastify";
 
 export function Register() {
     const showToast = useToast();
+    const { appName } = usePage().props;
     const { data, setData, post, processing, errors, reset } = useForm({
         name: "",
         email: "",
@@ -47,6 +48,7 @@ export function Register() {
 
     return (
         <>
+            <InertiaHead title={`Register - ${appName}`} />
             <ToastContainer containerId="toastContainer" />
             <img
                 src="https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80"

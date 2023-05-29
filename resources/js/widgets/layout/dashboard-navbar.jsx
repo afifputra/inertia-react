@@ -1,12 +1,9 @@
 import { Inertia } from "@inertiajs/inertia";
-import { Link } from "@inertiajs/inertia-react";
+import { usePage } from "@inertiajs/inertia-react";
 import {
     Navbar,
     Typography,
-    Button,
     IconButton,
-    Breadcrumbs,
-    Input,
     Menu,
     MenuHandler,
     MenuList,
@@ -33,8 +30,7 @@ import {
 export function DashboardNavbar() {
     const [controller, dispatch] = useMaterialTailwindController();
     const { fixedNavbar, openSidenav } = controller;
-    const layout = "dashboard";
-    const page = "dashboard";
+    const { config } = usePage().props;
 
     const handleLogout = () => {
         Inertia.post(route("logout"));
@@ -53,30 +49,8 @@ export function DashboardNavbar() {
         >
             <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
                 <div className="capitalize">
-                    <Breadcrumbs
-                        className={`bg-transparent p-0 transition-all ${
-                            fixedNavbar ? "mt-1" : ""
-                        }`}
-                    >
-                        <Link to={`/${layout}`}>
-                            <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100"
-                            >
-                                {layout}
-                            </Typography>
-                        </Link>
-                        <Typography
-                            variant="small"
-                            color="blue-gray"
-                            className="font-normal"
-                        >
-                            {page}
-                        </Typography>
-                    </Breadcrumbs>
                     <Typography variant="h6" color="blue-gray">
-                        {page}
+                        {config.currentRouteName}
                     </Typography>
                 </div>
                 <div className="flex items-center gap-2">

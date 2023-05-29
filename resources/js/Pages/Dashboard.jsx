@@ -9,12 +9,11 @@ import {
 import LayoutDashboard from "@/components/layouts/LayoutDashboard";
 
 export function Dashboard() {
-    const { user } = usePage().props;
-    console.log(user);
+    const { auth, appName } = usePage().props;
 
     return (
         <>
-            <InertiaHead title="Dashboard" />
+            <InertiaHead title={`Dashboard - ${appName}`} />
             <LayoutDashboard>
                 <div className="mt-12 mb-8 flex flex-col gap-12">
                     <Card>
@@ -29,7 +28,7 @@ export function Dashboard() {
                         </CardHeader>
                         <CardBody>
                             <Typography varian="lead">
-                                Selamat datang, {user.name}!
+                                Selamat datang, {auth.user.name}!
                             </Typography>
                         </CardBody>
                     </Card>
