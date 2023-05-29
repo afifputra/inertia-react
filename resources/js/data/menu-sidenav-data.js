@@ -1,4 +1,4 @@
-import { HomeIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, Cog8ToothIcon } from "@heroicons/react/24/solid";
 
 const MENU = [
     {
@@ -6,6 +6,13 @@ const MENU = [
         name: "Dashboard",
         icon: HomeIcon,
         url: route("dashboard"),
+        subMenu: [],
+    },
+    {
+        id: "setting",
+        name: "Settings",
+        icon: Cog8ToothIcon,
+        url: route("setting"),
         subMenu: [],
     },
 ];

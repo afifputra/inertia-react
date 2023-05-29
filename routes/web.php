@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Pages\DashboardController;
+use App\Http\Controllers\Pages\SettingController;
 
 use Inertia\Inertia;
 
@@ -33,6 +34,10 @@ Route::middleware(['guest'])->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, "index"])->name("dashboard");
+
+    Route::prefix('setting')->group(function () {
+        Route::get('/', [SettingController::class, "index"])->name("setting");
+    });
 
     Route::post('/logout', [LoginController::class, "destroy"])->name("logout");
 });

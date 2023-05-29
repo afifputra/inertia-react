@@ -77,7 +77,6 @@ export function Sidenav({ brandName }) {
                     </li>
                     <li>
                         {MENU.map((item, index) => {
-                            console.log(config.currentRouteName === item.id);
                             return (
                                 <Link href={item.url} key={index}>
                                     <Button
