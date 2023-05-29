@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+use App\Models\User;
+
 class LoginController extends Controller
 {
     public function index()
@@ -17,11 +19,13 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             'email' => ['required', 'max:255', 'email', 'exists:users', 'string'],
-            'password' => ['required', 'max:255', 'string']
+            'password' => ['required', 'max:255', 'string', 'min:8'],
         ]);
 
         if (!auth()->attempt($request->only('email', 'password'))) {
-            return redirect()->route('login')->with('error', 'Invalid login credentials!');
+            return back()->withErrors([
+                'password' => 'Your password is incorrect.'
+            ]);
         }
 
         $request->session()->regenerate();

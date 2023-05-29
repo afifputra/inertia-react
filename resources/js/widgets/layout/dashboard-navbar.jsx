@@ -1,3 +1,4 @@
+import { Inertia } from "@inertiajs/inertia";
 import { Link } from "@inertiajs/inertia-react";
 import {
     Navbar,
@@ -19,6 +20,9 @@ import {
     ClockIcon,
     CreditCardIcon,
     Bars3Icon,
+    PowerIcon,
+    InboxArrowDownIcon,
+    LifebuoyIcon,
 } from "@heroicons/react/24/solid";
 import {
     useMaterialTailwindController,
@@ -31,6 +35,10 @@ export function DashboardNavbar() {
     const { fixedNavbar, openSidenav } = controller;
     const layout = "dashboard";
     const page = "dashboard";
+
+    const handleLogout = () => {
+        Inertia.post(route("logout"));
+    };
 
     return (
         <Navbar
@@ -71,10 +79,7 @@ export function DashboardNavbar() {
                         {page}
                     </Typography>
                 </div>
-                <div className="flex items-center">
-                    <div className="mr-auto md:mr-4 md:w-56">
-                        <Input label="Type here" />
-                    </div>
+                <div className="flex items-center gap-2">
                     <IconButton
                         variant="text"
                         color="blue-gray"
@@ -86,23 +91,6 @@ export function DashboardNavbar() {
                             className="h-6 w-6 text-blue-gray-500"
                         />
                     </IconButton>
-                    <Link href={route("logout")} method="post">
-                        <Button
-                            variant="text"
-                            color="blue-gray"
-                            className="hidden items-center gap-1 px-4 xl:flex"
-                        >
-                            <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-                            Sign In
-                        </Button>
-                        <IconButton
-                            variant="text"
-                            color="blue-gray"
-                            className="grid xl:hidden"
-                        >
-                            <UserCircleIcon className="h-5 w-5 text-blue-gray-500" />
-                        </IconButton>
-                    </Link>
                     <IconButton
                         variant="text"
                         color="blue-gray"
@@ -189,6 +177,83 @@ export function DashboardNavbar() {
                                         days ago
                                     </Typography>
                                 </div>
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
+                    <Menu placement="bottom-end">
+                        <MenuHandler>
+                            <Avatar
+                                variant="circular"
+                                alt="candice wu"
+                                className="cursor-pointer"
+                                src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+                                size="sm"
+                            />
+                        </MenuHandler>
+                        <MenuList>
+                            <MenuItem className="flex items-center gap-2">
+                                <UserCircleIcon
+                                    strokeWidth={2}
+                                    className="h-4 w-4"
+                                />
+                                <Typography
+                                    variant="small"
+                                    className="font-normal"
+                                >
+                                    My Profile
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem className="flex items-center gap-2">
+                                <Cog6ToothIcon
+                                    strokeWidth={2}
+                                    className="h-4 w-4"
+                                />
+                                <Typography
+                                    variant="small"
+                                    className="font-normal"
+                                >
+                                    Edit Profile
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem className="flex items-center gap-2">
+                                <InboxArrowDownIcon
+                                    strokeWidth={2}
+                                    className="h-4 w-4"
+                                />
+                                <Typography
+                                    variant="small"
+                                    className="font-normal"
+                                >
+                                    Inbox
+                                </Typography>
+                            </MenuItem>
+                            <MenuItem className="flex items-center gap-2">
+                                <LifebuoyIcon
+                                    strokeWidth={2}
+                                    className="h-4 w-4"
+                                />
+                                <Typography
+                                    variant="small"
+                                    className="font-normal"
+                                >
+                                    Help
+                                </Typography>
+                            </MenuItem>
+                            <hr className="my-2 border-blue-gray-50" />
+                            <MenuItem
+                                className="flex items-center gap-2 "
+                                onClick={handleLogout}
+                            >
+                                <PowerIcon
+                                    strokeWidth={2}
+                                    className="h-4 w-4"
+                                />
+                                <Typography
+                                    variant="small"
+                                    className="font-normal"
+                                >
+                                    Sign Out
+                                </Typography>
                             </MenuItem>
                         </MenuList>
                     </Menu>
